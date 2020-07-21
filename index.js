@@ -75,7 +75,7 @@ function getWinnersByYear(cb1, cb2) {
     const years = cb2(getFinals);
     const wBy= [];
     winners.forEach(function(item, index){
-        wBy.push(`In ${years[index]}, ${item} won the world cup!`)
+        wBy.push(`In ${years[index]}, ${item} won the world cup!`) 
     });
     return wBy;
 };
@@ -86,10 +86,18 @@ console.log(getWinnersByYear(getWinners, getYears));
  returns the the average number of home team goals and away team goals scored per match 
  (Hint: use .reduce and do this in 2 steps) */
 
-function getAverageGoals(/* code here */) {
-
-    /* code here */
-
+function getAverageGoals(data) {
+    const homeSum = data.reduce(function(accumulator, item){
+        return accumulator + item["Home Team Goals"];
+    }, 0);
+    const awaySum = data.reduce(function(accumulator, item){
+        return accumulator + item["Away Team Goals"];
+    }, 0);
+    const averages = {
+        "Average Home Team Goals" : homeSum/data.length,
+        "Average Away Team Goals" : awaySum/data.length,
+    }
+    return averages;
 };
 
 console.log(getAverageGoals(fifaData));
